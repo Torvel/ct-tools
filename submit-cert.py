@@ -27,7 +27,7 @@ LOGS = {
 	'cnnic' : 'https://ctserver.cnnic.cn',
 	'startssl' : 'https://ct.startssl.com',
 	#'GDCA CT Log Server' : 'https://ct.gdca.com.cn',
-	'wosign' : 'https://ct.wosign.com',
+	'wosign' : 'https://ctlog.wosign.com',
 	#'Akamai Log' : 'https://ct.akamai.com',
 	'certificatetransparency.cn' : 'https://www.certificatetransparency.cn/ct',
 	'venafigen2' : 'http://ctlog-gen2.api.venafi.com',
