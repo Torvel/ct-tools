@@ -33,7 +33,7 @@ LOGS = {
     'venafigen2' : 'http://ctlog-gen2.api.venafi.com',
 }
 
-logs_json = requests.get("https://www.certificate-transparency.org/known-logs/log_list.json?attredirects=0")
+logs_json = requests.get("https://www.gstatic.com/ct/log_list/log_list.json")
 logs = {}
 
 try:
@@ -41,6 +41,7 @@ try:
 
     for l in logs_aux:
         logs.update({l.get("description"): "https://" + l.get("url")})
+        print "https://" + l.get("url")
 except ValueError:
     print "Error at logs list updating, using default list instead."
     logs = LOGS
@@ -74,7 +75,8 @@ data =  '{"chain" : ["' + '", "'.join(certdata) + '"]}'
 for l in logs:
     if not args.log or [x for x in args.log if x in l.lower()]:
         try:
-            r = requests.post(logs[l] + "/ct/v1/add-chain", data=data, verify=False, timeout=2)
+            r = requests.post(logs[l] + "ct/v1/add-chain", data=data, verify=False, timeout=2)
+            #r = requests.post(logs[l] + "ct/v2/submit-entry", data=data, verify=False, timeout=2)
             if r.status_code != 200:
                 print("Error {0} while submitting to {1}".format(r.status_code, l))
                 print(r.text)
